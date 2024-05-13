@@ -25,10 +25,10 @@ public class Main {
                 setUpSchema(conn);
             }
 
-            int newOrder = addOrder(conn, new String[]{"shoes", "shirt", "socks"});
-            System.out.println("New Order = " + newOrder);
-            removeOrder(conn, new String[]{"shoes", "shirt", "socks"});
-
+//            int newOrder = addOrder(conn, new String[]{"shoes", "shirt", "socks"});
+//            System.out.println("New Order = " + newOrder);
+//            removeOrder(conn, new String[]{"shoes", "shirt", "socks"});
+            deleteOrder(conn, 5);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -157,11 +157,33 @@ public class Main {
                 }
             }
             conn.commit();
-            conn.setAutoCommit(true);
 
         } catch(SQLException e) {
             conn.rollback();
             e.printStackTrace();
+        } finally {
+            conn.setAutoCommit(true);
+        }
+    }
+
+    public static void deleteOrder(Connection conn, int id) throws SQLException {
+        String deleteOrder = "DELETE FROM storefront.order WHERE order_id=%d";
+//        String findOrder = "SELECT order_id FROM storefront.order_details WHERE item_description=%s";
+
+        try(Statement statement = conn.createStatement()) {
+            conn.setAutoCommit(false);
+            int changes = statement.executeUpdate(deleteOrder.formatted(id));
+            if(changes == 1) {
+                System.out.printf("Delete order of order_id: %d!%n", id);
+            } else {
+                System.out.printf("No changes found for id: %d%n", id);
+            }
+            conn.commit();
+        } catch(SQLException e) {
+            conn.rollback();
+            e.printStackTrace();
+        } finally {
+            conn.setAutoCommit(true);
         }
     }
 

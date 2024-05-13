@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba709b52-59bd-4810-9528-3d8b34477bbf" name="Changes" comment="Section 22.363(Working with Databases: Creating a Store Front database, SQL Exceptions):&#10;writing data defining language  (DDL), use of &quot;USE schemaName&quot; as an execute statement to check existence of .db; &#10;&#10;using connection.getMetaData for .getSQLStateType to get insight on errors;&#10;additionally, using sqlException.getSQLState and .getErrorCode for more insight; + using System.err.print()&#10;&#10;created new database and tables for future videos;">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ba709b52-59bd-4810-9528-3d8b34477bbf" name="Changes" comment="Section 22.364(Working with Databases: JDBC Challenge, Transactions and Insertion using Statement): challenge part2;&#10;&#10;used Tim's solution for part1, createOrder to get started and familiar with the processes.&#10;&#10;this is now my successful attempt at part2; before any changes made after seeing tim's solution">
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +70,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715575457691</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Section 22.364(Working with Databases: JDBC Challenge, Transactions and Insertion using Statement): challenge part2;&#10;&#10;used Tim's solution for part1, createOrder to get started and familiar with the processes.&#10;&#10;this is now my successful attempt at part2; before any changes made after seeing tim's solution">
+      <created>1715581129047</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715581129047</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -87,6 +93,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Section 22.363(Working with Databases: Creating a Store Front database, SQL Exceptions):&#10;writing data defining language  (DDL), use of &quot;USE schemaName&quot; as an execute statement to check existence of .db; &#10;&#10;using connection.getMetaData for .getSQLStateType to get insight on errors;&#10;additionally, using sqlException.getSQLState and .getErrorCode for more insight; + using System.err.print()&#10;&#10;created new database and tables for future videos;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Section 22.363(Working with Databases: Creating a Store Front database, SQL Exceptions):&#10;writing data defining language  (DDL), use of &quot;USE schemaName&quot; as an execute statement to check existence of .db; &#10;&#10;using connection.getMetaData for .getSQLStateType to get insight on errors;&#10;additionally, using sqlException.getSQLState and .getErrorCode for more insight; + using System.err.print()&#10;&#10;created new database and tables for future videos;" />
+    <MESSAGE value="Section 22.364(Working with Databases: JDBC Challenge, Transactions and Insertion using Statement): challenge part2;&#10;&#10;used Tim's solution for part1, createOrder to get started and familiar with the processes.&#10;&#10;this is now my successful attempt at part2; before any changes made after seeing tim's solution" />
+    <option name="LAST_COMMIT_MESSAGE" value="Section 22.364(Working with Databases: JDBC Challenge, Transactions and Insertion using Statement): challenge part2;&#10;&#10;used Tim's solution for part1, createOrder to get started and familiar with the processes.&#10;&#10;this is now my successful attempt at part2; before any changes made after seeing tim's solution" />
   </component>
 </project>

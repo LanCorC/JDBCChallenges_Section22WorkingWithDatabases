@@ -1,9 +1,9 @@
 import com.mysql.cj.jdbc.MysqlDataSource;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Main {
     private static String USE_SCHEMA = "USE storefront";
@@ -24,6 +24,10 @@ public class Main {
                 System.out.println("storefront schema does not exist");
                 setUpSchema(conn);
             }
+
+            int newOrder = addOrder(conn, new String[]{"shoes", "shirt", "socks"});
+            System.out.println("New Order = " + newOrder);
+            removeOrder(conn, new String[]{"shoes", "shirt", "socks"});
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -79,4 +83,86 @@ public class Main {
             e.printStackTrace();
         }
     }
+
+    //Challenge 1:
+    public static int addOrder(Connection conn, String[] items) throws SQLException {
+        int orderId = -1;
+        String insertOrder = "INSERT INTO storefront.order (order_date) VALUES ('%s')";
+        String insertDetail = "INSERT INTO storefront.order_details " +
+                "(order_id, item_description) VALUES (%d, %s)";
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String orderDateTime = LocalDateTime.now().format(dtf);
+        System.out.println(orderDateTime);
+        String formattedString = insertOrder.formatted(orderDateTime);
+
+        String insertOrderAlternative = "INSERT INTO storefront.order (order_date) " +
+                "VALUES ('%1$tF %1$tT')";
+        System.out.println(insertOrderAlternative.formatted(LocalDateTime.now()));
+
+        try (Statement statement = conn.createStatement()){
+            conn.setAutoCommit(false);
+            int inserts = statement.executeUpdate(formattedString, Statement.RETURN_GENERATED_KEYS); //insertOrder
+
+            if(inserts == 1) { //'1' to say we added exactly one new id/row!
+                var rs = statement.getGeneratedKeys();
+                if(rs.next()) {
+                    orderId = rs.getInt(1);
+                }
+            }
+
+            int count = 0;
+            for(var item : items) {
+                formattedString = insertDetail.formatted(orderId,
+                        statement.enquoteLiteral(item));
+                inserts = statement.executeUpdate(formattedString);
+                count += inserts;
+            }
+            if(count != items.length) {
+                orderId = -1;
+                System.out.println("Number of records inserted do not equal items received!");
+                conn.rollback();
+            } else {
+                conn.commit();
+            }
+            conn.setAutoCommit(true);
+        } catch(SQLException e) {
+            conn.rollback();
+            throw new RuntimeException(e);
+        }
+
+        return orderId;
+    }
+
+    public static void removeOrder(Connection conn, String[] items) throws SQLException {
+        String deleteOrder = "DELETE FROM storefront.order WHERE order_id=%d";
+        String findOrder = "SELECT order_id FROM storefront.order_details WHERE item_description=%s";
+
+        try(Statement statement = conn.createStatement()) {
+            conn.setAutoCommit(false);
+            for(String item : items) {
+                String formatted = findOrder.formatted(
+                        statement.enquoteLiteral(item));
+                statement.execute(formatted);
+                ResultSet rs = statement.getResultSet();
+                int id = -1;
+                if(rs!=null && rs.next()) {
+                    id = rs.getInt(1);
+                }
+                int changes = statement.executeUpdate(deleteOrder.formatted(id));
+                if(changes == 1) {
+                    System.out.printf("Delete order of order_id: %d!%n", id);
+                } else {
+                    System.out.printf("No changes found for item: %s%n", item);
+                }
+            }
+            conn.commit();
+            conn.setAutoCommit(true);
+
+        } catch(SQLException e) {
+            conn.rollback();
+            e.printStackTrace();
+        }
+    }
+
 }

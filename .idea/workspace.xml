@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba709b52-59bd-4810-9528-3d8b34477bbf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    <list default="true" id="ba709b52-59bd-4810-9528-3d8b34477bbf" name="Changes" comment="Section 22.363(Working with Databases: Creating a Store Front database, SQL Exceptions):&#10;writing data defining language  (DDL), use of &quot;USE schemaName&quot; as an execute statement to check existence of .db; &#10;&#10;using connection.getMetaData for .getSQLStateType to get insight on errors;&#10;additionally, using sqlException.getSQLState and .getErrorCode for more insight; + using System.err.print()&#10;&#10;created new database and tables for future videos;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JDBCChallenges_Section22WorkingWithDatabases.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JDBCChallenges_Section22WorkingWithDatabases.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +64,14 @@
       <option name="presentableId" value="Default" />
       <updated>1715571912250</updated>
     </task>
+    <task id="LOCAL-00001" summary="Section 22.363(Working with Databases: Creating a Store Front database, SQL Exceptions):&#10;writing data defining language  (DDL), use of &quot;USE schemaName&quot; as an execute statement to check existence of .db; &#10;&#10;using connection.getMetaData for .getSQLStateType to get insight on errors;&#10;additionally, using sqlException.getSQLState and .getErrorCode for more insight; + using System.err.print()&#10;&#10;created new database and tables for future videos;">
+      <created>1715575457691</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715575457691</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -77,5 +84,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Section 22.363(Working with Databases: Creating a Store Front database, SQL Exceptions):&#10;writing data defining language  (DDL), use of &quot;USE schemaName&quot; as an execute statement to check existence of .db; &#10;&#10;using connection.getMetaData for .getSQLStateType to get insight on errors;&#10;additionally, using sqlException.getSQLState and .getErrorCode for more insight; + using System.err.print()&#10;&#10;created new database and tables for future videos;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Section 22.363(Working with Databases: Creating a Store Front database, SQL Exceptions):&#10;writing data defining language  (DDL), use of &quot;USE schemaName&quot; as an execute statement to check existence of .db; &#10;&#10;using connection.getMetaData for .getSQLStateType to get insight on errors;&#10;additionally, using sqlException.getSQLState and .getErrorCode for more insight; + using System.err.print()&#10;&#10;created new database and tables for future videos;" />
   </component>
 </project>

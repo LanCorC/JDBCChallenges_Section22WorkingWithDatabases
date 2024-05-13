@@ -28,7 +28,7 @@ public class Main {
 //            int newOrder = addOrder(conn, new String[]{"shoes", "shirt", "socks"});
 //            System.out.println("New Order = " + newOrder);
 //            removeOrder(conn, new String[]{"shoes", "shirt", "socks"});
-            deleteOrder(conn, 5);
+            deleteOrder(conn, 6);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -167,18 +167,23 @@ public class Main {
     }
 
     public static void deleteOrder(Connection conn, int id) throws SQLException {
-        String deleteOrder = "DELETE FROM storefront.order WHERE order_id=%d";
-//        String findOrder = "SELECT order_id FROM storefront.order_details WHERE item_description=%s";
+        String deleteOrder = "DELETE FROM %s WHERE order_id=%d";
+        String parentQuery = deleteOrder.formatted("storefront.order", id);
+        String childQuery = deleteOrder.formatted("storefront.order_details", id);
 
         try(Statement statement = conn.createStatement()) {
             conn.setAutoCommit(false);
-            int changes = statement.executeUpdate(deleteOrder.formatted(id));
-            if(changes == 1) {
-                System.out.printf("Delete order of order_id: %d!%n", id);
+            int changes = statement.executeUpdate(childQuery);
+            System.out.printf("Removed %d records%n", changes);
+            changes = statement.executeUpdate(parentQuery);
+            if(changes==1) {
+                conn.commit();
+                System.out.println("Removed OrderID: " + id);
             } else {
-                System.out.printf("No changes found for id: %d%n", id);
+                conn.rollback();
+                System.out.println("Something went wrong with removing OrderID: "
+                        + id);
             }
-            conn.commit();
         } catch(SQLException e) {
             conn.rollback();
             e.printStackTrace();
